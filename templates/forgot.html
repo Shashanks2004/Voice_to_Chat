@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reset Password - DIYA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Reset Password</h2>
+    <p class="subtitle">Enter your email and new password</p>
+
+    <input type="email" id="email" placeholder="Email" required>
+
+    <div class="password-wrapper">
+        <input type="password" id="password" placeholder="New Password" required>
+        <span onclick="togglePassword()">👁</span>
+    </div>
+
+    <button onclick="resetPassword()">RESET PASSWORD</button>
+
+    <p style="margin-top:20px;">
+        Remembered password?
+        <a href="/">Login</a>
+    </p>
+</div>
+
+<script>
+function resetPassword() {
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    fetch("https://voice-to-chat.onrender.com/reset-password", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        credentials: "include",
+        body: JSON.stringify({
+            email: email,
+            password: password
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            alert("Password updated successfully");
+            window.location.href = "/";
+        } else {
+            alert(data.message);
+        }
+    });
+}
+
+function togglePassword() {
+    const pass = document.getElementById("password");
+    pass.type = pass.type === "password" ? "text" : "password";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DIYA – AI Voice Coding Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+</head>
+<body>
+
+<div id="particles"></div>
+
+<header>
+    <h1>DIYA</h1>
+    <p>Developer Intelligent Voice Assistant</p>
+</header>
+
+<div class="center">
+
+    <div class="orb" id="orb"></div>
+
+    <div class="status" id="status">
+        Diya is active. Say "Hey Diya"
+    </div>
+
+    <div class="command-section">
+        <input type="text" id="commandInput"
+               placeholder="Your spoken command will appear here..." />
+        <button onclick="sendCommand(commandInput.value)">Generate</button>
+    </div>
+
+</div>
+
+<div class="code-box">
+    <div class="code-header">
+        <span>Generated Code</span>
+        <button onclick="copyCode()">Copy</button>
+    </div>
+    <pre id="codeOutput">// Code will appear here</pre>
+</div>
+
+<script src="{{ url_for('static', filename='diya.js') }}"></script>
+</body>
+</html>

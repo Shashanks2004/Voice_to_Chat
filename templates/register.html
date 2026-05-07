@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register - DIYA</title>
+    <link rel="stylesheet" href="/static/login.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Create Account</h2>
+
+    <form id="registerForm">
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit">REGISTER</button>
+    </form>
+</div>
+
+<script>
+document.getElementById("registerForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    fetch("https://voice-to-chat.onrender.com/register", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            email: email.value,
+            password: password.value
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            alert("Registration successful!");
+            window.location.href = "/";
+        } else {
+            alert(data.message);
+        }
+    });
+
+});
+</script>
+
+</body>
+</html>
